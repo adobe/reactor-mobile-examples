@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+    <link rel="stylesheet" href="../global.css">
+  </head>
+  <body>
+    No Configuration Needed
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          // no need to do anything here
+        },
+
+        getSettings: function() {
+          return {
+            "conditions": [
+              {
+                "type": "matcher",
+                "definition": {
+                  "key": "~type",
+                  "matcher": "eq",
+                  "values": [
+                    "com.adobe.eventType.weather"
+                  ]
+                }
+              },
+              {
+                "type": "matcher",
+                "definition": {
+                  "key": "~source",
+                  "matcher": "eq",
+                  "values": [
+                    "com.adobe.eventSource.responseContent"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+
+        validate: function() {
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>

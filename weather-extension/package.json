@@ -1,0 +1,15 @@
+{
+  "name": "test-scaffold",
+  "version": "1.0.0",
+  "description": "Testing the reactor-scaffold tool",
+  "main": "index.js",
+  "scripts": {
+    "sandbox": "reactor-sandbox"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@adobe/reactor-sandbox": "^10.0.4",
+    "@adobe/reactor-turbine": "^25.1.3"
+  }
+}

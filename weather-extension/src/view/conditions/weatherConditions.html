@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Condition</title>
+    <link rel="stylesheet" href="../global.css">
+  </head>
+  <body>
+      <form>
+          <label>
+            <span class="label">Weather Conditions are&nbsp;</span>
+            <select id="cond">
+                <option value='800'>Clear Sky</option>
+                <option value='802'>Scattered Clouds</option>
+                <option value='804'>Overcast</option>
+                <option value='701'>Mist</option>
+                <option value='741'>Fog</option>
+                <option value='600'>Snow</option>
+                <option value='600'>Snow</option>
+                <option value='500'>Rain</option>
+                <option value='211'>Thunderstorm</option>
+              </select>
+          </label>
+        </form>
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings && info.settings.conditions) {
+            document.getElementById('cond').value = info.settings.conditions[0].definition.values[0];
+          } else {
+            document.getElementById('cond').value = '800';
+          }
+        },
+
+        getSettings: function() {
+          var cond = document.getElementById('cond').value;
+
+          return {
+            conditions: [
+              {
+                type: "matcher",
+                definition: {
+                  key: "~state.com.adobe.module.weather/condition",
+                  matcher: 'eq',
+                  values: [cond]
+                }
+              }
+            ]
+          };
+        },
+
+        validate: function() {
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>

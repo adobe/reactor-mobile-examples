@@ -1,0 +1,103 @@
+{
+  "displayName": "Weather",
+  "name": "weather",
+  "platform": "mobile",
+  "version": "1.0.0",
+  "description": "Feed weather conditions into the SDK",
+  "iconPath": "resources/weather_icon.png",
+  "author": {
+    "name": "Adobe Systems",
+    "url": "http://adobe.com",
+    "email": "reactor@adobe.com"
+  },
+  "repositories": [
+    {
+      "className": "com.adobe.weather",
+      "groupId": "com.adobe.weather",
+      "artifactId": "weather",
+      "version": "1.0.0"
+    },
+    {
+      "headerName": "weather.h",
+      "libraryName": "weather",
+      "version": "1.0.0"
+    }
+  ],
+  "viewBasePath": "src/view/",
+  "configuration": {
+    "viewPath": "configuration/configuration.html",
+    "schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {}
+    }
+  },
+  "events": [
+    {
+      "displayName": "Weather Loaded",
+      "name": "weather-loaded",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "events/weatherLoaded.html"
+    }
+  ],
+  "actions": [
+    {
+      "displayName": "Refresh Weather",
+      "name": "weather",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/refreshWeather.html"
+    }
+  ],
+  "conditions": [
+    {
+      "displayName": "Weather Conditions",
+      "name": "weather-conditions",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "conditions/weatherConditions.html"
+    },
+    {
+      "displayName": "Current Temperature",
+      "name": "current-temperature",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "conditions/currentTemperature.html"
+    }
+  ],
+  "dataElements": [
+    {
+      "displayName": "Weather Conditions",
+      "name": "weather-conditions",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "dataElements/weatherConditions.html"
+    },
+    {
+      "displayName": "Current Temperature",
+      "name": "current-temperature",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "dataElements/currentTemperature.html"
+    }
+  ]
+}

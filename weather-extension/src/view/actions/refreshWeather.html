@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Action</title>
+    <link rel="stylesheet" href="../global.css">
+  </head>
+  <body>
+    <form>
+      <h5>Specifiy Location (optional):</h5>
+      <div>
+        <label>
+          <span class="label" style="width: 70px; display: inline-block">Latitude</span>
+          <input id="lat">
+        </label>
+      </div>
+      <br/>
+      <div>
+        <label>
+          <span class="label" style="width: 70px; display: inline-block">Longitude</span>
+          <input id="lng">
+        </label>
+      </div>
+    </form>
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings) {
+            document.getElementById('lat').value = (info.settings.lat) || '';
+            document.getElementById('lng').value = (info.settings.lng) || '';
+          }
+        },
+
+        getSettings: function() {
+          var latField = document.getElementById('lat');
+          var lngField = document.getElementById('lng');
+          var lat = latField.value ? Number(latField.value) : null;
+          var lng = lngField.value ? Number(lngField.value) : null;
+
+          return {
+            lat: lat,
+            lng: lng
+          };
+        },
+
+        validate: function() {
+          var latField = document.getElementById('lat');
+          var lngField = document.getElementById('lng');
+          var lat = Number(latField.value);
+          var lng = Number(lngField.value);
+          if (!lat && !lng) { return true; }
+
+          latField.invalid = (lng && !lat) || lat > 90 || lat < -90;
+          lngField.invalid = (!lng && lat) || lng > 180 || lng < -180;
+
+          return !latField.invalid && !lngField.invalid;
+        }
+      });
+    </script>
+  </body>
+</html>

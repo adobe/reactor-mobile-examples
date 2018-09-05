@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Extension Configuration</title>
+    <link rel="stylesheet" href="../global.css">
+  </head>
+  <body>
+      <form>
+          <div>
+            <label>
+              <span class="label">API Key&nbsp;</span>
+              <input id="apiKey">
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              <span class="label">Timeout&nbsp;</span>
+              <input id="timeout">
+            </label>
+          </div>
+        </form>
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings) {
+            document.getElementById('apiKey').value = info.settings['weather.apikey'];
+            document.getElementById('timeout').value = info.settings['weather.timeout'];
+          } else {
+            document.getElementById('timeout').value = 0;
+          }
+        },
+
+        getSettings: function() {
+          var timeout = Number(document.getElementById('timeout').value);
+          var key = document.getElementById('apiKey').value;
+          return {
+            'weather.apikey': key,
+            'weather.timeout': timeout
+          };
+        },
+
+        validate: function() {
+          var timeoutField = document.getElementById('timeout');
+          var timeout = Number(timeoutField.value);
+          timeoutField.invalid = isNaN(timeout) || timeout < 0;
+
+          var keyField = document.getElementById('apiKey');
+          var key = keyField.value;
+          keyField.invalid = !key;
+
+          return !timeoutField.invalid && !keyField.invalid;
+        }
+      });
+    </script>
+  </body>
+</html>

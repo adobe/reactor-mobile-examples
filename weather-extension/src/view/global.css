@@ -1,0 +1,15 @@
+body {
+  padding: 12px;
+  font-family: sans-serif;
+}
+
+.label {
+  line-height: 36px;
+  margin-right: 8px;
+  font: normal 12px sans-serif;
+  display: inline-block;
+}
+
+.u-gapRight {
+  margin-right: 8px;
+}
