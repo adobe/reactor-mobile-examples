@@ -4,7 +4,7 @@
   "platform": "mobile",
   "version": "1.0.0",
   "description": "Feed weather conditions into the SDK",
-  "iconPath": "resources/weather_icon.png",
+  "iconPath": "resources/weather.svg",
   "author": {
     "name": "Adobe Systems",
     "url": "http://adobe.com",
@@ -39,7 +39,9 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/eventConditions"
+        }]
       },
       "viewPath": "events/weatherLoaded.html"
     }
@@ -51,7 +53,10 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "properties": {},
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/consequence"
+        }]
       },
       "viewPath": "actions/refreshWeather.html"
     }
@@ -63,7 +68,9 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
+        }]
       },
       "viewPath": "conditions/weatherConditions.html"
     },
@@ -73,7 +80,9 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
+        }]
       },
       "viewPath": "conditions/currentTemperature.html"
     }
@@ -85,7 +94,9 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
+        }]
       },
       "viewPath": "dataElements/weatherConditions.html"
     },
@@ -95,7 +106,9 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {}
+        "allOf": [{
+          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
+        }]
       },
       "viewPath": "dataElements/currentTemperature.html"
     }
