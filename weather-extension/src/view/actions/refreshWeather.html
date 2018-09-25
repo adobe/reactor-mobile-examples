@@ -40,8 +40,10 @@
           var lng = lngField.value ? Number(lngField.value) : null;
 
           return {
-            lat: lat,
-            lng: lng
+            detail: {
+              lat: lat,
+              lng: lng
+            }
           };
         },
 
