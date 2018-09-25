@@ -13,13 +13,12 @@
   "repositories": [
     {
       "className": "com.adobe.weather",
-      "groupId": "com.adobe.weather",
-      "artifactId": "weather",
-      "version": "1.0.0"
+      "artifact": "com.adobe.weather:weather:1.0.0"
     },
     {
-      "headerName": "weather.h",
-      "libraryName": "weather",
+      "name": "weather",
+      "headerName": "weather/weather.h",
+      "interface": "weather",
       "version": "1.0.0"
     }
   ],
