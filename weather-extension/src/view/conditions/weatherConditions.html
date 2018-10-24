@@ -16,7 +16,6 @@
                 <option value='701'>Mist</option>
                 <option value='741'>Fog</option>
                 <option value='600'>Snow</option>
-                <option value='600'>Snow</option>
                 <option value='500'>Rain</option>
                 <option value='211'>Thunderstorm</option>
               </select>
@@ -42,7 +41,7 @@
               {
                 type: "matcher",
                 definition: {
-                  key: "~state.com.adobe.module.weather/condition",
+                  key: "~state.com.acpExample.weatherExtension/conditions",
                   matcher: 'eq',
                   values: [cond]
                 }

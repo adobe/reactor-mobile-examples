@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <link rel="stylesheet" href="../global.css">
+  </head>
+  <body>
+      <form>
+          <label>
+            <span class="label">Zip Code&nbsp;</span>
+            <input maxLength="5" id="zip">
+          </label>
+        </form>
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings && info.settings.conditions) {
+            document.getElementById('zip').value = info.settings.conditions[0].definition.values[0];
+          } else {
+            document.getElementById('zip').value = "00000";
+          }
+        },
+
+        getSettings: function() {
+          var zip = document.getElementById('zip').value;
+
+          return {
+            conditions: [
+              {
+                type: "matcher",
+                definition: {
+                  key: "~state.com.acpExample.weatherExtension/zip",
+                  matcher: 'eq',
+                  values: [zip]
+                }
+              }
+            ]
+          };
+        },
+
+        validate: function() {
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>

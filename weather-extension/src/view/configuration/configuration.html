@@ -27,7 +27,7 @@
       window.extensionBridge.register({
         init: function(info) {
           if (info.settings) {
-            document.getElementById('apiKey').value = info.settings['weather.apikey'];
+            document.getElementById('apiKey').value = info.settings['weather.apiKey'];
             document.getElementById('timeout').value = info.settings['weather.timeout'];
           } else {
             document.getElementById('timeout').value = 0;
@@ -38,7 +38,7 @@
           var timeout = Number(document.getElementById('timeout').value);
           var key = document.getElementById('apiKey').value;
           return {
-            'weather.apikey': key,
+            'weather.apiKey': key,
             'weather.timeout': timeout
           };
         },

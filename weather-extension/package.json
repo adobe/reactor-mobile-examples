@@ -4,12 +4,16 @@
   "description": "Testing the reactor-scaffold tool",
   "main": "index.js",
   "scripts": {
-    "sandbox": "reactor-sandbox"
+    "package": "reactor-packager",
+    "sandbox": "reactor-sandbox",
+    "upload": "reactor-uploader"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@adobe/reactor-sandbox": "^10.0.4",
-    "@adobe/reactor-turbine": "^25.1.3"
+    "@adobe/reactor-packager": "^3.0.2",
+    "@adobe/reactor-sandbox": "^10.0.5",
+    "@adobe/reactor-turbine": "^25.1.3",
+    "@adobe/reactor-uploader": "^1.1.1"
   }
 }

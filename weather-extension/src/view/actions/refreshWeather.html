@@ -7,55 +7,47 @@
   </head>
   <body>
     <form>
-      <h5>Specifiy Location (optional):</h5>
-      <div>
-        <label>
-          <span class="label" style="width: 70px; display: inline-block">Latitude</span>
-          <input id="lat">
-        </label>
-      </div>
-      <br/>
-      <div>
-        <label>
-          <span class="label" style="width: 70px; display: inline-block">Longitude</span>
-          <input id="lng">
-        </label>
-      </div>
+      <label>
+        <span class="label">Zip Code&nbsp;</span>
+        <input id="zip">
+        <button id="zipIDE" class="spectrum-ActionButton spectrum-ActionButton--quiet">
+          <svg viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img" class="spectrum-Icon spectrum-Icon--sizeS">
+            <ellipse cx="18" cy="7" rx="16" ry="5"></ellipse>
+            <path d="M18 24.275c-4.936 0-14.212-1.169-16-4V29c0 2.761 7.163 5 16 5s16-2.239 16-5v-8.73c-2.447 3.095-11.064 4.005-16 4.005z"></path>
+            <path d="M18 14.275c-4.936 0-14.212-1.169-16-4V17c0 2.761 7.163 5 16 5s16-2.239 16-5v-6.73c-2.447 3.095-11.064 4.005-16 4.005z"></path>
+          </svg>
+        </button>
+      </label>
     </form>
 
     <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
     <script>
+      var zipIDE = document.getElementById('zipIDE');
+      zipIDE.onclick = function() {
+        window.extensionBridge.openDataElementSelector().then(function(dataElement) {
+          document.getElementById('zip').value = dataElement;
+        });
+      };
+
       window.extensionBridge.register({
         init: function(info) {
-          if (info.settings) {
-            document.getElementById('lat').value = (info.settings.lat) || '';
-            document.getElementById('lng').value = (info.settings.lng) || '';
+          if (info.settings && info.settings.detail) {
+            document.getElementById('zip').value = (info.settings.detail.zip) || '';
           }
         },
 
         getSettings: function() {
-          var latField = document.getElementById('lat');
-          var lngField = document.getElementById('lng');
-          var lat = latField.value ? Number(latField.value) : null;
-          var lng = lngField.value ? Number(lngField.value) : null;
+          var zip = document.getElementById('zip').value;
 
           return {
-            lat: lat,
-            lng: lng
+            detail: {
+              zip: zip
+            }
           };
         },
 
         validate: function() {
-          var latField = document.getElementById('lat');
-          var lngField = document.getElementById('lng');
-          var lat = Number(latField.value);
-          var lng = Number(lngField.value);
-          if (!lat && !lng) { return true; }
-
-          latField.invalid = (lng && !lat) || lat > 90 || lat < -90;
-          lngField.invalid = (!lng && lat) || lng > 180 || lng < -180;
-
-          return !latField.invalid && !lngField.invalid;
+          return true;
         }
       });
     </script>

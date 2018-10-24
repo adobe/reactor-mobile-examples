@@ -2,7 +2,7 @@
   "displayName": "Weather",
   "name": "weather",
   "platform": "mobile",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Feed weather conditions into the SDK",
   "iconPath": "resources/weather.svg",
   "author": {
@@ -12,14 +12,13 @@
   },
   "repositories": [
     {
-      "className": "com.adobe.weather",
-      "groupId": "com.adobe.weather",
-      "artifactId": "weather",
-      "version": "1.0.0"
+      "className": "com.acpExample.weatherExtension",
+      "artifact": "com.acpExample.weatherExtension:weatherExtension:1.0.0"
     },
     {
-      "headerName": "weather.h",
-      "libraryName": "weather",
+      "name": "WeatherExtension",
+      "headerName": "ACPExample/WeatherExtension.h",
+      "interface": "WeatherExtension",
       "version": "1.0.0"
     }
   ],
@@ -39,9 +38,69 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/eventConditions"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/eventConditions"
+          }
+        ],
+        "properties": {
+          "conditions": {
+            "type": "array",
+            "items": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/eventTypeCondition"
+                  }
+                ],
+                "properties": {
+                  "type": {},
+                  "definition": {
+                    "properties": {
+                      "key": {},
+                      "matcher": {},
+                      "values": {
+                        "items": [
+                          {
+                            "enum": [
+                              "com.acpExample.eventType.weatherExtension"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/eventSourceCondition"
+                  }
+                ],
+                "properties": {
+                  "type": {},
+                  "definition": {
+                    "properties": {
+                      "key": {},
+                      "matcher": {},
+                      "values": {
+                        "items": [
+                          {
+                            "enum": [
+                              "com.acpExample.eventSource.responseContent"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "additionalItems": false
+          }
+        }
       },
       "viewPath": "events/weatherLoaded.html"
     }
@@ -49,14 +108,25 @@
   "actions": [
     {
       "displayName": "Refresh Weather",
-      "name": "weather",
+      "name": "wthr",
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {},
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/consequence"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/consequence"
+          }
+        ],
+        "properties": {
+          "detail": {
+            "type": "object",
+            "properties": {
+              "zip": {
+                "type": "string"
+              }
+            }
+          }
+        }
       },
       "viewPath": "actions/refreshWeather.html"
     }
@@ -68,11 +138,72 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
+          }
+        ],
+        "properties": {
+          "conditions": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/condition"
+                }
+              ],
+              "properties": {
+                "type": {},
+                "definition": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "~state.com.acpExample.weatherExtension/conditions"
+                      ]
+                    },
+                    "matcher": {
+                      "items": {
+                        "enum": [
+                          "eq"
+                        ]
+                      }
+                    },
+                    "values": {
+                      "items": {
+                        "enum": [
+                          "800",
+                          "802",
+                          "804",
+                          "701",
+                          "741",
+                          "600",
+                          "500",
+                          "211"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "viewPath": "conditions/weatherConditions.html"
+    },
+    {
+      "displayName": "Zip Code",
+      "name": "zip-code",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
+          }
+        ]
+      },
+      "viewPath": "conditions/zipCode.html"
     },
     {
       "displayName": "Current Temperature",
@@ -80,9 +211,11 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/conditions"
+          }
+        ]
       },
       "viewPath": "conditions/currentTemperature.html"
     }
@@ -94,9 +227,11 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
+          }
+        ]
       },
       "viewPath": "dataElements/weatherConditions.html"
     },
@@ -106,11 +241,27 @@
       "schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "allOf": [{
-          "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
-        }]
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
+          }
+        ]
       },
       "viewPath": "dataElements/currentTemperature.html"
+    },
+    {
+      "displayName": "Zip Code",
+      "name": "zip-code",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "https://assets.adobedtm.com/activation/reactor/schemas/1.0/extension-definitions-mobile.json#/definitions/dataElement"
+          }
+        ]
+      },
+      "viewPath": "dataElements/zipCode.html"
     }
   ]
 }

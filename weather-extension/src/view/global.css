@@ -3,6 +3,34 @@ body {
   font-family: sans-serif;
 }
 
+button {
+  box-shadow: none;
+  color: #2c2c2c;
+  cursor: pointer;
+  padding: 0 12px;
+  border-width: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+}
+
+svg {
+  margin: -4px -12px;
+  width: 1.125rem;
+  height: 1.125rem;
+  max-height: 100%;
+  flex-shrink: 0;
+  display: inline-block;
+  color: inherit;
+  fill: currentColor;
+  border: none;
+}
+
+.invalid {
+  border-color: red;
+}
+
 .label {
   line-height: 36px;
   margin-right: 8px;
