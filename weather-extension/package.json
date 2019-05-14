@@ -1,19 +1,25 @@
 {
-  "name": "test-scaffold",
+  "name": "@adobe/weather-extension",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adobe/reactor-mobile-examples.git"
+  },
   "description": "Testing the reactor-scaffold tool",
-  "main": "index.js",
+  "author": "Larry Davis <amadt5@gmail.com>",
+  "contributors": [
+    "Dan Grossen <dangrossen@gmail.com>"
+  ],
   "scripts": {
     "package": "reactor-packager",
     "sandbox": "reactor-sandbox",
     "upload": "reactor-uploader"
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@adobe/reactor-packager": "^3.0.2",
-    "@adobe/reactor-sandbox": "^10.0.5",
-    "@adobe/reactor-turbine": "^25.1.3",
-    "@adobe/reactor-uploader": "^1.1.1"
+    "@adobe/reactor-packager": "^3.0.5",
+    "@adobe/reactor-sandbox": "^10.4.2",
+    "@adobe/reactor-turbine": "^25.4.1",
+    "@adobe/reactor-uploader": "^3.0.0"
   }
 }
